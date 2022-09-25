@@ -4,7 +4,6 @@ import App from './App.vue'
 
 createApp(App).mount('#app')
 
-// vue3 写法
 /**
  
 const app =  createApp(App)
@@ -12,7 +11,8 @@ app.mount('#app')
 
  */
 
-// vue2 怎么写的？
+
+
 /*
     new Vue({
         render:h => h(App) 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+            vue3 简单实现原理
+        */
+        let person = {
+            name:'张三',
+            age:18
+        }
+
+        let p = new Proxy(person,{
+            // 读取
+            get(target,propName){
+                console.log(`读取了p身上的${propName}某个属性`);
+                return target[propName]
+            },
+            // 修改，新增
+            set(target,propName,value){
+                console.log(`修改了p身上的${propName}某个属性，需要去更新页面了`);
+                target[propName] = value
+            },
+            // 删除
+            deleteProperty(target,propName){
+                console.log(`删除了p身上的${propName}某个属性，需要去更新页面了`);
+                return delete target[propName]
+            }
+        })
+
+
+        /*
+         vue3 深入理解   window.Reflect
+        */
+        
+        let q = new Proxy(person,{
+            // 读取
+            get(target,propName){
+                console.log(`读取了q身上的${propName}某个属性`);
+                return Reflect.get(target,propName)
+            },
+            // 修改，新增
+            set(target,propName,value){
+                console.log(`修改了q身上的${propName}某个属性，需要去更新页面了`);
+                Reflect.set(target,propName,value)
+            },
+            // 删除
+            deleteProperty(target,propName){
+                console.log(`删除了q身上的${propName}某个属性，需要去更新页面了`);
+                return delete Reflect(target,propName)
+            }
+        })
+        
+    </script>
+</body>
+</html>
